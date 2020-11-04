@@ -1,5 +1,6 @@
 from datetime import datetime
 
+# TODO: Use HSV to get a nicer time to colour conversion
 def get_colour(divisor, val):
     r=255
     g=255
