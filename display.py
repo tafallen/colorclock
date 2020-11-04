@@ -29,48 +29,46 @@ hour_leds = [
     [4,4]
 ]
 
+minute_leds = [
+    [1,1],
+    [1,2],
+    [1,3],
+
+    [2,1],
+    [2,3],
+
+    [3,1],
+    [3,2],
+    [3,3],
+]
+
+second_leds = [
+    [2,2]
+]
+
 def set_hour_pixels(col):
-    r = col[0]
-    g = col[1]
-    b = col[2]
-
     for x in hour_leds:
-        matrix.set_pixel(x[0],x[1], r,b,g)
-    # matrix.set_pixel(0,0, r,b,g)
-    # matrix.set_pixel(0,1, r,b,g)
-    # matrix.set_pixel(0,2, r,b,g)
-    # matrix.set_pixel(0,3, r,b,g)
-    # matrix.set_pixel(0,4, r,b,g)
-
-    # matrix.set_pixel(1,0, r,b,g)
-    # matrix.set_pixel(1,4, r,b,g)
-
-    # matrix.set_pixel(2,0, r,b,g)
-    # matrix.set_pixel(2,4, r,b,g)
-
-    # matrix.set_pixel(3,0, r,b,g)
-    # matrix.set_pixel(3,4, r,b,g)
-
-    # matrix.set_pixel(4,0, r,b,g)
-    # matrix.set_pixel(4,1, r,b,g)
-    # matrix.set_pixel(4,2, r,b,g)
-    # matrix.set_pixel(4,3, r,b,g)
-    # matrix.set_pixel(4,4, r,b,g)
+        matrix.set_pixel(x[0],x[1], col[0],col[1],col[2])
+    matrix.show()
 
 def set_minute_pixels(col):
-    r = col[0]
-    g = col[1]
-    b = col[2]
-    matrix.set_pixel(1,1, r,b,g)
-    matrix.set_pixel(1,2, r,b,g)
-    matrix.set_pixel(1,3, r,b,g)
-    matrix.set_pixel(2,1, r,b,g)
-    matrix.set_pixel(2,3, r,b,g)
-    matrix.set_pixel(3,1, r,b,g)
-    matrix.set_pixel(3,2, r,b,g)
-    matrix.set_pixel(3,3, r,b,g)
+    for x in minute_leds:
+        matrix.set_pixel(x[0],x[1], col[0],col[1],col[2])
+    # r = col[0]
+    # g = col[1]
+    # b = col[2]
+    # matrix.set_pixel(1,1, r,b,g)
+    # matrix.set_pixel(1,2, r,b,g)
+    # matrix.set_pixel(1,3, r,b,g)
+    # matrix.set_pixel(2,1, r,b,g)
+    # matrix.set_pixel(2,3, r,b,g)
+    # matrix.set_pixel(3,1, r,b,g)
+    # matrix.set_pixel(3,2, r,b,g)
+    # matrix.set_pixel(3,3, r,b,g)
     matrix.show()
 
 def set_second_pixels( col ):
-    matrix.set_pixel(2,2,col[0],col[1],col[2])
+    for x in second_leds:
+        matrix.set_pixel(x[0],x[1], col[0],col[1],col[2])
+    # matrix.set_pixel(2,2,col[0],col[1],col[2])
     matrix.show()
