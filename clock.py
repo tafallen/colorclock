@@ -21,7 +21,7 @@ def get_colour(divisor, val):
         g = step
         b = 0
     else:
-        step = int(x * (val - 30))
+        step = int(x * (val - divisor))
         r = 0
         g = 255 - step
         b = step
