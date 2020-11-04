@@ -51,12 +51,15 @@ def get_colour_12(val):
     return [r,g,b]
 
 
+def update_display(time):
+    display.set_hour_pixels(get_colour_12(time.hour))
+    display.set_minute_pixels(get_colour_60(time.minute))
+    display.set_second_pixels(get_colour_60(time.second))
+
 while True:
     now = datetime.now()
 
-    display.set_hour_pixels(get_colour_12(now.hour))
-    display.set_minute_pixels(get_colour_60(now.minute))
-    display.set_second_pixels(get_colour_60(now.second))
+    update_display(now)
 
     time.sleep(1)
 
