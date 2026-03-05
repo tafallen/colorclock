@@ -1,32 +1,13 @@
+import colorsys
 from datetime import datetime
 
-# TODO: Use HSV to get a nicer time to colour conversion
+# Use HSV to get a nicer time to colour conversion
 def get_colour(divisor, val):
-    r=255
-    g=255
-    b=255
+    # hue goes from 0.0 to 1.0 over the range of 2 * divisor
+    hue = (val / (2.0 * divisor)) % 1.0
+    r, g, b = colorsys.hsv_to_rgb(hue, 1.0, 1.0)
 
-    if divisor == 0:
-        return [r, g, b]
-
-    x = 255/divisor
-
-    if val == divisor:
-        r = 0
-        b = 0
-        g = 255
-    elif val < divisor:
-        step =  int(x * val)
-        r = 255 - step
-        g = step
-        b = 0
-    else:
-        step = int(x * (val - divisor))
-        r = 0
-        g = 255 - step
-        b = step
-
-    return [r,g,b]
+    return [int(r * 255), int(g * 255), int(b * 255)]
 
 def get_colour_60( val ):
     return get_colour(30,val)
