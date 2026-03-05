@@ -5,6 +5,10 @@ def get_colour(divisor, val):
     r=255
     g=255
     b=255
+
+    if divisor == 0:
+        return [r, g, b]
+
     x = 255/divisor
 
     if val == divisor:
