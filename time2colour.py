@@ -1,5 +1,6 @@
 import colorsys
 from datetime import datetime
+import functools
 
 # Use HSV to get a nicer time to colour conversion
 def get_colour(divisor, val):
@@ -9,9 +10,11 @@ def get_colour(divisor, val):
 
     return [int(r * 255), int(g * 255), int(b * 255)]
 
+@functools.lru_cache(maxsize=64)
 def get_colour_60( val ):
     return get_colour(30,val)
 
+@functools.lru_cache(maxsize=32)
 def get_colour_12(val):
     return get_colour(12,val)
 
