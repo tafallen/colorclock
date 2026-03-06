@@ -1,8 +1,14 @@
 import unittest
 from unittest.mock import Mock
 from time2colour import get_colour, get_colour_12, get_colour_60, get_colours_for_time
+from datetime import time
 
 class TestTime2Colour(unittest.TestCase):
+    def test_get_colour_zero_divisor(self):
+        with self.assertRaises(ValueError) as context:
+            get_colour(0, 15)
+        self.assertEqual(str(context.exception), "Divisor cannot be 0")
+
     def test_get_colour_edge_cases(self):
         # val == divisor
         # hue = (30 / 60) % 1.0 = 0.5 -> cyan [0, 255, 255]
@@ -49,6 +55,30 @@ class TestTime2Colour(unittest.TestCase):
         expected_second = get_colour(30, 45)
 
         self.assertEqual(get_colours_for_time(mock_time), [expected_hour, expected_minute, expected_second])
+
+        # Test with a specific time: 10:30:45
+        test_time = time(10, 30, 45)
+        expected_hour_colour = get_colour_12(10)
+        expected_minute_colour = get_colour_60(30)
+        expected_second_colour = get_colour_60(45)
+
+        colours = get_colours_for_time(test_time)
+        self.assertEqual(len(colours), 3)
+        self.assertEqual(colours[0], expected_hour_colour)
+        self.assertEqual(colours[1], expected_minute_colour)
+        self.assertEqual(colours[2], expected_second_colour)
+
+        # Test with midnight
+        test_time_midnight = time(0, 0, 0)
+        expected_hour_colour_midnight = get_colour_12(0)
+        expected_minute_colour_midnight = get_colour_60(0)
+        expected_second_colour_midnight = get_colour_60(0)
+
+        colours_midnight = get_colours_for_time(test_time_midnight)
+        self.assertEqual(len(colours_midnight), 3)
+        self.assertEqual(colours_midnight[0], expected_hour_colour_midnight)
+        self.assertEqual(colours_midnight[1], expected_minute_colour_midnight)
+        self.assertEqual(colours_midnight[2], expected_second_colour_midnight)
 
 if __name__ == "__main__":
     unittest.main()
