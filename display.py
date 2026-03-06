@@ -56,4 +56,6 @@ def set_second_pixels(col):
 def set_pixels(col,leds):
     for led in leds:
         matrix.set_pixel(led[0],led[1], col[0],col[1],col[2])
+
+def show():
     matrix.show()
