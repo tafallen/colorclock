@@ -4,6 +4,7 @@ import functools
 
 # Use HSV to get a nicer time to colour conversion
 def get_colour(divisor, val):
+    """Calculate the HSV colour for a given time unit value."""
     # hue goes from 0.0 to 1.0 over the range of 2 * divisor
     hue = (val / (2.0 * divisor)) % 1.0
     r, g, b = colorsys.hsv_to_rgb(hue, 1.0, 1.0)
