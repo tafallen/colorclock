@@ -1,5 +1,4 @@
 import colorsys
-from datetime import datetime
 import functools
 
 # Use HSV to get a nicer time to colour conversion
