@@ -10,6 +10,7 @@ def update_display(current_time):
     display.set_hour_pixels(cols[0])
     display.set_minute_pixels(cols[1])
     display.set_second_pixels(cols[2])
+    display.show()
 
 
 while True:
