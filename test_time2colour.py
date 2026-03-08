@@ -23,6 +23,14 @@ class TestTime2Colour(unittest.TestCase):
         self.assertEqual(get_colour(30, 45), [127, 0, 255])
         self.assertEqual(get_colour(30, 60), [255, 0, 0])
 
+    def test_get_colour_modulo(self):
+        # tests modulo logic when val > 2 * divisor
+        self.assertEqual(get_colour(30, 75), get_colour(30, 15))
+
+    def test_get_colour_negative(self):
+        # tests negative val
+        self.assertEqual(get_colour(30, -15), get_colour(30, 45))
+
     def test_get_colour_12(self):
         # Just check it matches get_colour(12, val)
         for i in range(24):
