@@ -3,6 +3,10 @@ import functools
 
 # Use HSV to get a nicer time to colour conversion
 def get_colour(divisor, val):
+    if not isinstance(divisor, (int, float)):
+        raise TypeError("Divisor must be a number")
+    if not isinstance(val, (int, float)):
+        raise TypeError("Value must be a number")
     if divisor == 0:
         raise ValueError("Divisor cannot be 0")
     # hue goes from 0.0 to 1.0 over the range of 2 * divisor
