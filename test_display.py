@@ -14,7 +14,7 @@ class TestDisplay(unittest.TestCase):
         display.matrix.reset_mock()
 
     def test_set_pixels(self):
-        col = [255, 128, 0]
+        col = (255, 128, 0)
         leds = [(0, 1), (2, 3), (4, 4)]
 
         display.set_pixels(col, leds)
@@ -29,7 +29,7 @@ class TestDisplay(unittest.TestCase):
         self.assertEqual(display.matrix.set_pixel.call_count, 3)
 
     def test_set_hour_pixels(self):
-        col = [10, 20, 30]
+        col = (10, 20, 30)
         display.set_hour_pixels(col)
 
         # Verify set_pixel was called for each hour LED
@@ -40,7 +40,7 @@ class TestDisplay(unittest.TestCase):
         display.matrix.set_pixel.assert_any_call(first_led[0], first_led[1], col[0], col[1], col[2])
 
     def test_set_minute_pixels(self):
-        col = [40, 50, 60]
+        col = (40, 50, 60)
         display.set_minute_pixels(col)
 
         self.assertEqual(display.matrix.set_pixel.call_count, len(display.minute_leds))
@@ -48,7 +48,7 @@ class TestDisplay(unittest.TestCase):
         display.matrix.set_pixel.assert_any_call(first_led[0], first_led[1], col[0], col[1], col[2])
 
     def test_set_second_pixels(self):
-        col = [70, 80, 90]
+        col = (70, 80, 90)
         display.set_second_pixels(col)
 
         self.assertEqual(display.matrix.set_pixel.call_count, len(display.second_leds))
