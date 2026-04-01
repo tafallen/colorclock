@@ -1,5 +1,6 @@
 import colorsys
 import functools
+import datetime
 
 # Use HSV to get a nicer time to colour conversion
 def get_colour(divisor, val):
@@ -19,8 +20,10 @@ def get_colour_60( val ):
 def get_colour_12(val):
     return get_colour(12,val)
 
-def get_colours_for_time(time):
-    hour = get_colour_12(time.hour)
-    minute = get_colour_60(time.minute)
-    second = get_colour_60(time.second)
+def get_colours_for_time(current_time):
+    if not isinstance(current_time, (datetime.time, datetime.datetime)):
+        raise TypeError("current_time must be a datetime.time or datetime.datetime object")
+    hour = get_colour_12(current_time.hour)
+    minute = get_colour_60(current_time.minute)
+    second = get_colour_60(current_time.second)
     return [hour,minute,second]

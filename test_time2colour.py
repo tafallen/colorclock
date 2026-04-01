@@ -1,6 +1,6 @@
 import unittest
 from time2colour import get_colour, get_colour_12, get_colour_60, get_colours_for_time
-from datetime import time
+from datetime import time, datetime
 
 class TestTime2Colour(unittest.TestCase):
     def test_get_colour_zero_divisor(self):
@@ -65,6 +65,36 @@ class TestTime2Colour(unittest.TestCase):
         self.assertEqual(colours_midnight[0], expected_hour_colour_midnight)
         self.assertEqual(colours_midnight[1], expected_minute_colour_midnight)
         self.assertEqual(colours_midnight[2], expected_second_colour_midnight)
+
+    def test_get_colours_for_time_invalid_input(self):
+        # Test with None
+        with self.assertRaises(TypeError) as context:
+            get_colours_for_time(None)
+        self.assertEqual(str(context.exception), "current_time must be a datetime.time or datetime.datetime object")
+
+        # Test with string
+        with self.assertRaises(TypeError) as context:
+            get_colours_for_time("10:30:45")
+        self.assertEqual(str(context.exception), "current_time must be a datetime.time or datetime.datetime object")
+
+        # Test with integer
+        with self.assertRaises(TypeError) as context:
+            get_colours_for_time(123456789)
+        self.assertEqual(str(context.exception), "current_time must be a datetime.time or datetime.datetime object")
+
+        # Test with dummy object
+        class Dummy:
+            pass
+        with self.assertRaises(TypeError) as context:
+            get_colours_for_time(Dummy())
+        self.assertEqual(str(context.exception), "current_time must be a datetime.time or datetime.datetime object")
+
+    def test_get_colours_for_datetime(self):
+        # Test that datetime.datetime objects are also accepted
+        test_dt = datetime(2023, 10, 27, 10, 30, 45)
+        colours = get_colours_for_time(test_dt)
+        self.assertEqual(len(colours), 3)
+        self.assertEqual(colours[0], get_colour_12(10))
 
 if __name__ == "__main__":
     unittest.main()
