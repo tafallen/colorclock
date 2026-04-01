@@ -13,8 +13,11 @@ def update_display(current_time):
     display.show()
 
 
-while True:
-    update_display(datetime.now())
+def main():
+    while True:
+        update_display(datetime.now())
+        time.sleep(1)
 
-    time.sleep(1)
+if __name__ == "__main__":
+    main()
 
