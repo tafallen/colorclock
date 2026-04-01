@@ -59,5 +59,26 @@ class TestDisplay(unittest.TestCase):
         display.show()
         display.matrix.show.assert_called_once()
 
+    def test_led_coordinates_validity(self):
+        groups = {
+            'hour_leds': display.hour_leds,
+            'minute_leds': display.minute_leds,
+            'second_leds': display.second_leds
+        }
+
+        all_coords = []
+        for name, leds in groups.items():
+            # Check for duplicates within each group
+            self.assertEqual(len(leds), len(set(leds)), f"Duplicates found in {name}")
+
+            for x, y in leds:
+                # Check bounds
+                self.assertTrue(0 <= x < 5, f"x-coordinate {x} out of bounds in {name}")
+                self.assertTrue(0 <= y < 5, f"y-coordinate {y} out of bounds in {name}")
+                all_coords.append((x, y))
+
+        # Check for overlaps between groups
+        self.assertEqual(len(all_coords), len(set(all_coords)), "Overlapping LEDs found between groups")
+
 if __name__ == '__main__':
     unittest.main()
