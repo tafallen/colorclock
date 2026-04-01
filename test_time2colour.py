@@ -10,18 +10,18 @@ class TestTime2Colour(unittest.TestCase):
 
     def test_get_colour_edge_cases(self):
         # val == divisor
-        self.assertEqual(get_colour(30, 30), [0, 255, 255])
-        self.assertEqual(get_colour(12, 12), [0, 255, 255])
+        self.assertEqual(get_colour(30, 30), (0, 255, 255))
+        self.assertEqual(get_colour(12, 12), (0, 255, 255))
 
     def test_get_colour_below_divisor(self):
         # val < divisor
-        self.assertEqual(get_colour(30, 0), [255, 0, 0])
-        self.assertEqual(get_colour(30, 15), [127, 255, 0])
+        self.assertEqual(get_colour(30, 0), (255, 0, 0))
+        self.assertEqual(get_colour(30, 15), (127, 255, 0))
 
     def test_get_colour_above_divisor(self):
         # val > divisor
-        self.assertEqual(get_colour(30, 45), [127, 0, 255])
-        self.assertEqual(get_colour(30, 60), [255, 0, 0])
+        self.assertEqual(get_colour(30, 45), (127, 0, 255))
+        self.assertEqual(get_colour(30, 60), (255, 0, 0))
 
     def test_get_colour_modulo(self):
         # tests modulo logic when val > 2 * divisor
